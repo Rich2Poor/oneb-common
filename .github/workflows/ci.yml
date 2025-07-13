@@ -8,6 +8,11 @@ on:
   release:
     types: [ published ]
 
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -31,13 +36,13 @@ jobs:
     - name: Run tests
       run: mvn clean test
     
-    - name: Generate test report
-      uses: dorny/test-reporter@v1
-      if: success() || failure()
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v4
+      if: always()
       with:
-        name: Maven Tests
-        path: target/surefire-reports/*.xml
-        reporter: java-junit
+        name: test-results
+        path: target/surefire-reports/
+        retention-days: 30
 
   build:
     needs: test
