@@ -12,6 +12,7 @@ permissions:
   contents: read
   actions: read
   checks: write
+  packages: write
 
 jobs:
   test:
@@ -84,6 +85,9 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
+        server-id: github
+        server-username: GITHUB_ACTOR
+        server-password: GITHUB_TOKEN
     
     - name: Cache Maven dependencies
       uses: actions/cache@v3
@@ -102,6 +106,7 @@ jobs:
       run: mvn deploy -DskipTests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_ACTOR: ${{ github.actor }}
 
   snapshot-publish:
     needs: [test, build]
@@ -116,6 +121,9 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
+        server-id: github
+        server-username: GITHUB_ACTOR
+        server-password: GITHUB_TOKEN
     
     - name: Cache Maven dependencies
       uses: actions/cache@v3
@@ -136,3 +144,4 @@ jobs:
       run: mvn deploy -DskipTests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_ACTOR: ${{ github.actor }}
