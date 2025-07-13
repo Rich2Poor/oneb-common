@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 
+                              http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    
+    <servers>
+        <server>
+            <id>github</id>
+            <username>YOUR_GITHUB_USERNAME</username>
+            <password>YOUR_GITHUB_TOKEN</password>
+        </server>
+    </servers>
+    
+</settings>
+
+<!-- 
+Instructions:
+1. Copy this file to ~/.m2/settings.xml
+2. Replace YOUR_GITHUB_USERNAME with your GitHub username
+3. Replace YOUR_GITHUB_TOKEN with your GitHub Personal Access Token
+4. Make sure your token has 'read:packages' and 'write:packages' permissions
+
+To create a GitHub Personal Access Token:
+1. Go to GitHub Settings > Developer settings > Personal access tokens
+2. Click "Generate new token"
+3. Select scopes: read:packages, write:packages
+4. Copy the generated token and use it as password in settings.xml
+-->
