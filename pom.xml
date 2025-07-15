@@ -5,7 +5,7 @@
 
     <groupId>com.oneb</groupId>
     <artifactId>oneb-common</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>OneB Common Library</name>
@@ -37,6 +37,9 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>6.1.0</spring.version>
+        <spring.boot.version>3.3.2</spring.boot.version>
+        <spring.kafka.version>3.3.1</spring.kafka.version>
+        <jackson.version>2.15.2</jackson.version>
         <lombok.version>1.18.30</lombok.version>
         <junit.version>5.10.0</junit.version>
     </properties>
@@ -57,6 +60,14 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Spring Boot AutoConfigure (for @ConditionalOnProperty) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>${spring.boot.version}</version>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -70,6 +81,30 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.9</version>
+        </dependency>
+
+        <!-- Spring Kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>${spring.kafka.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Jackson Core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Jackson Databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+            <optional>true</optional>
         </dependency>
 
         <!-- Jakarta Annotations (for @PreDestroy) -->

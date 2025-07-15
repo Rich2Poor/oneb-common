@@ -1,4 +1,4 @@
-package oneb.com.common.util;
+package com.oneb.common.util;
 
 import java.util.*;
 import java.util.function.Function;

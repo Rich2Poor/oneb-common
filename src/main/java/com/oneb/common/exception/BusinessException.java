@@ -1,4 +1,4 @@
-package oneb.com.common.exception;
+package com.oneb.common.exception;
 
 /**
  * Exception for business logic errors.

@@ -1,4 +1,4 @@
-package oneb.com.common.util;
+package com.oneb.common.util;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;

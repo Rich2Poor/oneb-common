@@ -55,89 +55,91 @@ And configure authentication in your `~/.m2/settings.xml`:
 ### String Utilities
 
 ```java
-import oneb.com.common.util.StringUtils;
+import util.com.oneb.common.StringUtils;
 
 // Basic string operations
 boolean isEmpty = StringUtils.isEmpty(str);
-boolean isBlank = StringUtils.isBlank(str);
-String defaultValue = StringUtils.defaultIfEmpty(str, "default");
+        boolean isBlank = StringUtils.isBlank(str);
+        String defaultValue = StringUtils.defaultIfEmpty(str, "default");
 
-// String transformations
-String camelCase = StringUtils.toCamelCase("test_string");
-String snakeCase = StringUtils.toSnakeCase("testString");
-String capitalized = StringUtils.capitalize("test");
+        // String transformations
+        String camelCase = StringUtils.toCamelCase("test_string");
+        String snakeCase = StringUtils.toSnakeCase("testString");
+        String capitalized = StringUtils.capitalize("test");
 
-// Validation
-boolean isEmail = StringUtils.isValidEmail("test@example.com");
-boolean isPhone = StringUtils.isValidPhone("+1234567890");
-boolean isNumeric = StringUtils.isNumeric("12345");
+        // Validation
+        boolean isEmail = StringUtils.isValidEmail("test@example.com");
+        boolean isPhone = StringUtils.isValidPhone("+1234567890");
+        boolean isNumeric = StringUtils.isNumeric("12345");
 
-// String manipulation
-String truncated = StringUtils.truncate("long string", 10);
-String reversed = StringUtils.reverse("test");
-int count = StringUtils.countOccurrences("test test", "test");
+        // String manipulation
+        String truncated = StringUtils.truncate("long string", 10);
+        String reversed = StringUtils.reverse("test");
+        int count = StringUtils.countOccurrences("test test", "test");
 ```
 
 ### Date Utilities
 
 ```java
-import oneb.com.common.util.DateUtils;
+import util.com.oneb.common.DateUtils;
+
 import java.time.*;
 
 // Current date/time
 Instant now = DateUtils.now();
-LocalDate today = DateUtils.today();
-LocalDateTime nowDateTime = DateUtils.nowDateTime();
+        LocalDate today = DateUtils.today();
+        LocalDateTime nowDateTime = DateUtils.nowDateTime();
 
-// Formatting
-String dateStr = DateUtils.formatDate(LocalDate.now());
-String dateTimeStr = DateUtils.formatDateTime(LocalDateTime.now());
-String isoStr = DateUtils.formatToIso(LocalDateTime.now());
+        // Formatting
+        String dateStr = DateUtils.formatDate(LocalDate.now());
+        String dateTimeStr = DateUtils.formatDateTime(LocalDateTime.now());
+        String isoStr = DateUtils.formatToIso(LocalDateTime.now());
 
-// Parsing
-LocalDate date = DateUtils.parseDate("2023-12-25");
-LocalDateTime dateTime = DateUtils.parseDateTime("2023-12-25 10:30:00");
+        // Parsing
+        LocalDate date = DateUtils.parseDate("2023-12-25");
+        LocalDateTime dateTime = DateUtils.parseDateTime("2023-12-25 10:30:00");
 
-// Calculations
-long daysBetween = DateUtils.daysBetween(startDate, endDate);
-long hoursBetween = DateUtils.hoursBetween(startDateTime, endDateTime);
-int age = DateUtils.getAge(birthDate);
+        // Calculations
+        long daysBetween = DateUtils.daysBetween(startDate, endDate);
+        long hoursBetween = DateUtils.hoursBetween(startDateTime, endDateTime);
+        int age = DateUtils.getAge(birthDate);
 
-// Date checks
-boolean isToday = DateUtils.isToday(someDate);
-boolean isLeapYear = DateUtils.isLeapYear(2024);
+        // Date checks
+        boolean isToday = DateUtils.isToday(someDate);
+        boolean isLeapYear = DateUtils.isLeapYear(2024);
 ```
 
 ### Collection Utilities
 
 ```java
-import oneb.com.common.util.CollectionUtils;
+import util.com.oneb.common.CollectionUtils;
+
 import java.util.*;
 
 // Basic operations
 boolean isEmpty = CollectionUtils.isEmpty(collection);
-int size = CollectionUtils.size(collection);
-String first = CollectionUtils.first(list);
-String last = CollectionUtils.last(list);
+        int size = CollectionUtils.size(collection);
+        String first = CollectionUtils.first(list);
+        String last = CollectionUtils.last(list);
 
-// Creating collections
-List<String> list = CollectionUtils.listOf("a", "b", "c");
-Set<String> set = CollectionUtils.setOf("a", "b", "c");
-Map<String, String> map = CollectionUtils.mapOf("key", "value");
+        // Creating collections
+        List<String> list = CollectionUtils.listOf("a", "b", "c");
+        Set<String> set = CollectionUtils.setOf("a", "b", "c");
+        Map<String, String> map = CollectionUtils.mapOf("key", "value");
 
-// Functional operations
-List<String> filtered = CollectionUtils.filter(list, s -> s.startsWith("a"));
-List<Integer> mapped = CollectionUtils.map(list, String::length);
-Optional<String> found = CollectionUtils.findFirst(list, s -> s.contains("test"));
+        // Functional operations
+        List<String> filtered = CollectionUtils.filter(list, s -> s.startsWith("a"));
+        List<Integer> mapped = CollectionUtils.map(list, String::length);
+        Optional<String> found = CollectionUtils.findFirst(list, s -> s.contains("test"));
 
-// Set operations
-Set<String> intersection = CollectionUtils.intersection(set1, set2);
-Set<String> union = CollectionUtils.union(set1, set2);
-Set<String> difference = CollectionUtils.difference(set1, set2);
+        // Set operations
+        Set<String> intersection = CollectionUtils.intersection(set1, set2);
+        Set<String> union = CollectionUtils.union(set1, set2);
+        Set<String> difference = CollectionUtils.difference(set1, set2);
 
-// Grouping and transformations
-Map<Integer, List<String>> grouped = CollectionUtils.groupBy(list, String::length);
-List<List<String>> partitions = CollectionUtils.partition(list, 3);
+        // Grouping and transformations
+        Map<Integer, List<String>> grouped = CollectionUtils.groupBy(list, String::length);
+        List<List<String>> partitions = CollectionUtils.partition(list, 3);
 ```
 
 ### JSON Utilities
@@ -145,7 +147,7 @@ List<List<String>> partitions = CollectionUtils.partition(list, 3);
 First, configure a JSON processor (example with Jackson):
 
 ```java
-import oneb.com.common.util.JsonUtils;
+import util.com.oneb.common.JsonUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 // Configure JSON processor (do this once at application startup)
@@ -162,15 +164,19 @@ boolean isValid = JsonUtils.isValidJson(json);
 ### Exception Handling
 
 ```java
-import oneb.com.common.exception.*;
+import com.oneb.common.exception.BaseException;
 
 // Business exceptions
-throw new BusinessException("INVALID_OPERATION", "Operation not allowed");
+throw new BusinessException("INVALID_OPERATION","Operation not allowed");
 
 // Validation exceptions
 Map<String, String> errors = new HashMap<>();
-errors.put("email", "Invalid email format");
-throw new ValidationException("Validation failed", errors);
+errors.
+
+put("email","Invalid email format");
+throw new
+
+ValidationException("Validation failed",errors);
 
 // Custom exceptions
 public class CustomException extends BaseException {
@@ -185,29 +191,30 @@ public class CustomException extends BaseException {
 If you're using Spring, you can use the provided Spring components:
 
 ```java
-import oneb.com.common.spring.*;
+import com.oneb.common.spring.AsyncExecutor;
+import com.oneb.common.spring.TransactionHelper;
 
 @Service
 public class MyService {
-    
+
     @Autowired
     private TransactionHelper transactionHelper;
-    
+
     @Autowired
     private AsyncExecutor asyncExecutor;
-    
+
     public void doSomething() {
         // Execute in new transaction
         String result = transactionHelper.isolate(() -> {
             // Your transactional code here
             return "result";
         });
-        
+
         // Execute asynchronously
         asyncExecutor.runAsync(() -> {
             // Your async code here
         });
-        
+
         // Execute with locking
         asyncExecutor.runAsync(() -> {
             // Your code here

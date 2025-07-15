@@ -1,4 +1,4 @@
-package oneb.com.common.util;
+package com.oneb.common.util;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

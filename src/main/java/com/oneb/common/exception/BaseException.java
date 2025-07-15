@@ -1,4 +1,4 @@
-package oneb.com.common.exception;
+package com.oneb.common.exception;
 
 /**
  * Base exception class for all custom exceptions in OneB projects.

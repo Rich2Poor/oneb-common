@@ -1,4 +1,4 @@
-package oneb.com.common.spring;
+package com.oneb.common.spring;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
