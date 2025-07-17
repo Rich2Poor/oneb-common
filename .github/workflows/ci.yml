@@ -111,7 +111,7 @@ jobs:
   snapshot-publish:
     needs: [test, build]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
     
     steps:
     - uses: actions/checkout@v4
