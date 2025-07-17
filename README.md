@@ -164,7 +164,7 @@ boolean isValid = JsonUtils.isValidJson(json);
 ### Exception Handling
 
 ```java
-import com.oneb.common.exception.BaseException;
+
 
 // Business exceptions
 throw new BusinessException("INVALID_OPERATION","Operation not allowed");
