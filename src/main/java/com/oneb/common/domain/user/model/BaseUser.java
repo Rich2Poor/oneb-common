@@ -6,7 +6,6 @@ import com.oneb.common.domain.user.enums.UserStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -16,9 +15,6 @@ import lombok.Setter;
 @Getter
 @MappedSuperclass
 public class BaseUser extends DateAudit {
-
-    @Id
-    protected Long id;
 
     protected String username;
     protected String firstName;
