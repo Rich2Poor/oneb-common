@@ -10,7 +10,8 @@ public enum HeaderKey {
     USER("User"),
     USER_INFO("User-Info"),
     X_USER_TENANT("X-User-Tenant"),
-    X_USER_ROLES("X-User-Roles");
+    X_USER_ROLES("X-User-Roles"),
+    X_CLIENT_IP("X-Client-IP");
 
     private final String value;
 }
