@@ -9,6 +9,7 @@ import lombok.ToString;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.function.Function;
 
 @Setter
 @Getter
@@ -37,5 +38,14 @@ public class PagingDto<T> {
         this.totalPages = page.getTotalPages();
         this.content = page.getContent();
         this.numberOfElements = page.getNumberOfElements();
+    }
+
+    public PagingDto<T> map(Function<List<T>, List<T>> mapper) {
+        this.content = mapper.apply(this.content);
+        return this;
+    }
+
+    public static <T> PagingDto<T> of(Page<T> page) {
+        return new PagingDto<>(page);
     }
 }
