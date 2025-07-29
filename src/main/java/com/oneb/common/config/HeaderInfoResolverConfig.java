@@ -3,6 +3,7 @@ package com.oneb.common.config;
 import com.oneb.common.annotation.resolver.HeaderInfoArgumentResolver;
 import com.oneb.common.domain.user.UserInfoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -15,7 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HeaderInfoResolverConfig implements WebMvcConfigurer {
 
-    private final UserInfoService userInfoService;
+    @Autowired(required = false)
+    private UserInfoService userInfoService;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
