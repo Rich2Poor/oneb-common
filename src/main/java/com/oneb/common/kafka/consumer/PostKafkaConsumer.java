@@ -1,7 +1,7 @@
 package com.oneb.common.kafka.consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.oneb.common.domain.community.PostKafkaService;
+import com.oneb.common.domain.community.PostKafkaHandler;
 import com.oneb.common.domain.community.dto.PostEventDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +16,13 @@ import org.springframework.stereotype.Component;
 public class PostKafkaConsumer {
 
     private final ObjectMapper objectMapper;
-    private final PostKafkaService postKafkaService;
+    private final PostKafkaHandler postKafkaHandler;
 
     @KafkaListener(topics = "#{@kafkaConsumerTopicProperties.postEvents}")
     public void receiveCommunityCreateUser(String createUserDtoJson) {
         try {
             PostEventDto postEventDto = objectMapper.readValue(createUserDtoJson, PostEventDto.class);
-            postKafkaService.handle(postEventDto);
+            postKafkaHandler.handle(postEventDto);
 
             log.info("Received post event: {}", createUserDtoJson);
         } catch (Exception e) {
