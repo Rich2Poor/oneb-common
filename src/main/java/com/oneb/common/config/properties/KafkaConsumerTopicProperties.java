@@ -12,5 +12,4 @@ import java.util.List;
 public class KafkaConsumerTopicProperties {
     private List<String> userCreated;
     private List<String> userUpdated;
-    private List<String> postEvents;
 }
