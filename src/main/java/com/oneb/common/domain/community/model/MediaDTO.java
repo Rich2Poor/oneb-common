@@ -21,5 +21,8 @@ public class MediaDTO {
     @NotNull
     private Integer height;
     private Double duration;
-    private ThumbnailDTO thumbnail;
+    private Long thumbnailId;
+    private String thumbnailUrl;
+    private Long thumbnailWidth;
+    private Long thumbnailHeight;
 }
