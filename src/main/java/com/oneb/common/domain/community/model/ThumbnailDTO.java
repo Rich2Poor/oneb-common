@@ -1,6 +1,5 @@
 package com.oneb.common.domain.community.model;
 
-import com.oneb.common.domain.community.enums.MediaType;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,9 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MediaDTO {
-    @NotNull
-    private MediaType type;
+public class ThumbnailDTO {
     @NotNull
     private Long id;
     @NotNull
@@ -20,6 +17,4 @@ public class MediaDTO {
     private Integer width;
     @NotNull
     private Integer height;
-    private Double duration;
-    private ThumbnailDTO thumbnail;
 }
