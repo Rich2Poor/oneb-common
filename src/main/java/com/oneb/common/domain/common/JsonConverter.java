@@ -1,7 +1,10 @@
 package com.oneb.common.domain.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
@@ -13,6 +16,12 @@ public class JsonConverter<T> implements AttributeConverter<List<T>, String> {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private final Class<T> clazz;
+
+    static {
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
 
     public JsonConverter(Class<T> clazz) {
         this.clazz = clazz;
