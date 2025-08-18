@@ -1,0 +1,56 @@
+# Example configuration for AI content generation
+app:
+  common:
+    # Enable the WebClient configuration (required for OpenRouter)
+    client:
+      enabled: true
+      timeout: 60000
+      read-timeout: 60000
+      write-timeout: 60000
+    ai:
+      openrouter:
+        # Enable OpenRouter.ai integration
+        enabled: true
+        
+        # Your OpenRouter.ai API key (required)
+        api-key: ${OPENROUTER_API_KEY:your-api-key-here}
+        
+        # OpenRouter.ai API base URL (optional, defaults to https://openrouter.ai/api/v1)
+        base-url: https://openrouter.ai/api/v1
+        
+        # Default model to use (optional, defaults to openai/gpt-3.5-turbo)
+        default-model: openai/gpt-4
+        
+        # Default generation parameters
+        default-temperature: 0.7
+        default-max-tokens: 1000
+        default-top-p: 1.0
+        default-frequency-penalty: 0.0
+        default-presence-penalty: 0.0
+        
+        # HTTP client timeouts
+        connection-timeout: PT30S
+        read-timeout: PT60S
+        write-timeout: PT60S
+        
+        # Retry configuration
+        max-retries: 3
+        retry-delay: PT1S
+        
+        # Optional: Application tracking (for OpenRouter.ai analytics)
+        app-name: "Your App Name"
+        app-url: "https://your-app.com"
+
+# Example of other common configurations that might be used alongside
+logging:
+  level:
+    com.oneb.common.ai: DEBUG
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always

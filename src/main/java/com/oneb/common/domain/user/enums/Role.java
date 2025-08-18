@@ -1,6 +1,7 @@
 package com.oneb.common.domain.user.enums;
 
 public enum Role {
+    ROLE_AI,
     ROLE_SUPER_ADMIN,
     ROLE_ADMIN,
     ROLE_MANAGER,

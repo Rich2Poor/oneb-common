@@ -70,6 +70,9 @@ public class HeaderInfoArgumentResolver implements HandlerMethodArgumentResolver
     @SneakyThrows
     private Object getUser(HttpServletRequest request) {
         UserInfo userInfo = getUserInfo(request);
+        if (userInfoService == null) {
+            throw new BadRequestException("User info service not found");
+        }
         return userInfoService.findByUserInfo(userInfo)
                 .orElseThrow(() -> new BadRequestException("User not found"));
     }
