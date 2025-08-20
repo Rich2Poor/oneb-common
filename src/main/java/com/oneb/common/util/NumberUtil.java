@@ -9,4 +9,8 @@ public class NumberUtil {
     public static int randomInt(int min, int max) {
         return RANDOM.nextInt((max - min) + 1) + min;
     }
+
+    public static long randomLong(long min, long max) {
+        return RANDOM.nextLong((max - min) + 1) + min;
+    }
 }
