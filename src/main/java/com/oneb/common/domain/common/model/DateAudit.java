@@ -20,7 +20,6 @@ public abstract class DateAudit implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @CreatedDate
     protected Instant createdAt = Instant.now();
 
     @LastModifiedDate
