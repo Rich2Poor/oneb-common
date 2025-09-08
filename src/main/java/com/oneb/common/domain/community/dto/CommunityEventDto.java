@@ -19,6 +19,7 @@ public class CommunityEventDto {
     private String fullName;
     private String description;
     private String avatar;
+    private String largeAvatar;
     private boolean official;
     private String accessType; // PUBLIC, PRIVATE, etc.
     private Long memberCount;
