@@ -1,7 +1,6 @@
 package com.oneb.common.domain.user.model;
 
 import com.oneb.common.domain.common.model.DateAudit;
-import com.oneb.common.domain.user.enums.AuthProvider;
 import com.oneb.common.domain.user.enums.UserStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
@@ -27,14 +26,8 @@ public class BaseUser extends DateAudit {
     @Column(name = "status", length = 20)
     protected UserStatus status = UserStatus.ACTIVE;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    protected AuthProvider provider;
-
-    protected String providerId;
-
     @Column(name = "default_language")
-    protected String defaultLanguage = "EN";
+    protected String defaultLanguage = "en";
 
     @Column(name = "tenant", length = 20)
     protected String tenant;
