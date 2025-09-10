@@ -14,4 +14,5 @@ public class KafkaConsumerTopicProperties {
     private List<String> userUpdated;
     private List<String> postEvents;
     private List<String> communityEvents;
+    private List<String> commentEvents;
 }

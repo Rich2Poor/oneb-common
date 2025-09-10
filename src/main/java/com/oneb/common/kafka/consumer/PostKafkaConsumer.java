@@ -19,14 +19,14 @@ public class PostKafkaConsumer {
     private final PostKafkaHandler postKafkaHandler;
 
     @KafkaListener(topics = "#{@kafkaConsumerTopicProperties.postEvents}")
-    public void receiveCommunityCreateUser(String createUserDtoJson) {
+    public void receivePostEvent(String message) {
         try {
-            PostEventDto postEventDto = objectMapper.readValue(createUserDtoJson, PostEventDto.class);
+            PostEventDto postEventDto = objectMapper.readValue(message, PostEventDto.class);
             postKafkaHandler.handle(postEventDto);
 
-            log.info("Received post event: {}", createUserDtoJson);
+            log.info("Received post event: {}", message);
         } catch (Exception e) {
-            log.error("Error processing post event", e);
+            log.error("Error processing post event {}", message, e);
         }
     }
 }

@@ -19,14 +19,14 @@ public class UserUpdateKafkaConsumer {
     private final UserKafkaService userKafkaService;
 
     @KafkaListener(topics = "#{@kafkaConsumerTopicProperties.userUpdated}")
-    public void receiveCommunityUpdateUser(String updateUserDtoJson) {
+    public void receiveCommunityUpdateUser(String message) {
         try {
-            UpdateUserKafkaDto updateUserKafkaDto = objectMapper.readValue(updateUserDtoJson, UpdateUserKafkaDto.class);
+            UpdateUserKafkaDto updateUserKafkaDto = objectMapper.readValue(message, UpdateUserKafkaDto.class);
             userKafkaService.updateUserByKafka(updateUserKafkaDto);
 
-            log.info("Received update user: {}", updateUserDtoJson);
+            log.info("Received update user: {}", message);
         } catch (Exception e) {
-            log.error("Error processing update user event", e);
+            log.error("Error processing update user event {}", message, e);
         }
     }
 }

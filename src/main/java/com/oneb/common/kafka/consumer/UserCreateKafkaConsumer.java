@@ -19,14 +19,14 @@ public class UserCreateKafkaConsumer {
     private final UserKafkaService userKafkaService;
 
     @KafkaListener(topics = "#{@kafkaConsumerTopicProperties.userCreated}")
-    public void receiveCommunityCreateUser(String createUserDtoJson) {
+    public void receiveCommunityCreateUser(String message) {
         try {
-            CreateUserKafkaDto createUserKafkaDto = objectMapper.readValue(createUserDtoJson, CreateUserKafkaDto.class);
+            CreateUserKafkaDto createUserKafkaDto = objectMapper.readValue(message, CreateUserKafkaDto.class);
             userKafkaService.createUserByKafka(createUserKafkaDto);
 
-            log.info("Received create user: {}", createUserDtoJson);
+            log.info("Received create user: {}", message);
         } catch (Exception e) {
-            log.error("Error processing create user event", e);
+            log.error("Error processing create user event {}", message, e);
         }
     }
 }

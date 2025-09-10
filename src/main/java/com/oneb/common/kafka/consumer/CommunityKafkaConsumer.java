@@ -12,7 +12,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
-@ConditionalOnProperty(name = {"app.common.kafka.consumer.topics.postEvents"})
+@ConditionalOnProperty(name = {"app.common.kafka.consumer.topics.communityEvents"})
 @Component
 @Slf4j
 public class CommunityKafkaConsumer {
@@ -21,14 +21,14 @@ public class CommunityKafkaConsumer {
     private final CommunityKafkaHandler communityKafkaHandler;
 
     @KafkaListener(topics = "#{@kafkaConsumerTopicProperties.communityEvents}")
-    public void receiveCommunityCreateUser(String message) {
+    public void receiveCommunityEvent(String message) {
         try {
             CommunityEventDto communityEventDto = objectMapper.readValue(message, CommunityEventDto.class);
             communityKafkaHandler.handle(communityEventDto);
 
             log.info("Received community event: {}", message);
         } catch (Exception e) {
-            log.error("Error processing community event", e);
+            log.error("Error processing community event {}", message, e);
         }
     }
 }
