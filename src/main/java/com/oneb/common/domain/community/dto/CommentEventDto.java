@@ -32,6 +32,8 @@ public class CommentEventDto {
     private Long postAuthorId; // Author username of the post
     private Long parentAuthorId; // Username of parent comment author (null if root comment)
     private MediaDTO media; // JSON string of media attachments
+    private Long communityId;
+    private String communityName;
     private Instant createdAt;
     private Instant eventTimestamp;
 }
