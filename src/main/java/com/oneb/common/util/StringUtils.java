@@ -1,5 +1,7 @@
 package com.oneb.common.util;
 
+import com.github.slugify.Slugify;
+
 import java.util.Collection;
 import java.util.regex.Pattern;
 
@@ -18,11 +20,35 @@ public final class StringUtils {
     private static final Pattern PHONE_PATTERN = Pattern.compile(
         "^[+]?[0-9]{10,15}$"
     );
+
+    private static final Slugify slugify = Slugify.builder()
+            .customReplacement("đ", "d")
+            .customReplacement("Đ", "d")
+            .customReplacement("ð", "d") // Alternative đ encoding
+            .customReplacement("Ø", "o")
+            .customReplacement("ø", "o")
+            .build();
     
     private StringUtils() {
         // Utility class
     }
-    
+
+    public static String normalizeToUsername(String input) {
+        String normalized = slugify(input);
+        if (normalized == null) {
+            return null;
+        }
+        return normalized.replaceAll("[^a-z0-9._-]", "");
+    }
+
+    public static String slugify(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return input;
+        }
+
+        return slugify.slugify(input.toLowerCase().trim());
+    }
+
     /**
      * Check if a string is null or empty.
      */
