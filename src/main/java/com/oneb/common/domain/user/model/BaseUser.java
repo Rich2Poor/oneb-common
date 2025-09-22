@@ -16,8 +16,7 @@ import lombok.Setter;
 public class BaseUser extends DateAudit {
 
     protected String username;
-    protected String firstName;
-    protected String lastName;
+    protected String fullName;
     protected String avatar;
     protected String avatarLargeUrl;
 

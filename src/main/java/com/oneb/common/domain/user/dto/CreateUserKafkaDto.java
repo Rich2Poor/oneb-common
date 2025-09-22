@@ -20,8 +20,7 @@ import java.util.Set;
 public class CreateUserKafkaDto {
     private Long id;
     private String username;
-    private String lastName;
-    private String firstName;
+    private String fullName;
     private String avatar;
     protected String avatarLargeUrl;
     private String cover;

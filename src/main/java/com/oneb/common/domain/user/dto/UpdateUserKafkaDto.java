@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class UpdateUserKafkaDto {
     private Long id;
     private String username;
-    private String firstName;
+    private String fullName;
     private String avatar;
     private String avatarLargeUrl;
     private String bio;
