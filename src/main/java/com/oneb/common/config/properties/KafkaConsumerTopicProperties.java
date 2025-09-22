@@ -18,4 +18,5 @@ public class KafkaConsumerTopicProperties {
     private List<String> postSaveEvents;
     private List<String> commentReactionEvents;
     private List<String> postReactionEvents;
+    private List<String> followEvents;
 }

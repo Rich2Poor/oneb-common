@@ -13,7 +13,7 @@ class PostSaveEventDtoTest {
     void testPostSaveEventDto_Creation() {
         // Given
         PostSaveEventDto event = new PostSaveEventDto();
-        event.setEventType(EventType.SAVE);
+        event.setEventType(EventType.CREATE);
         event.setAuthorId(1L);
         event.setAuthorUsername("testuser");
         event.setAuthorAvatar("avatar.jpg");
@@ -26,7 +26,7 @@ class PostSaveEventDtoTest {
         event.setPostAuthorId(101L);
 
         // Then
-        assertEquals(EventType.SAVE, event.getEventType());
+        assertEquals(EventType.CREATE, event.getEventType());
         assertEquals(1L, event.getAuthorId());
         assertEquals("testuser", event.getAuthorUsername());
         assertEquals("avatar.jpg", event.getAuthorAvatar());
@@ -44,7 +44,7 @@ class PostSaveEventDtoTest {
         // Given
         Instant timestamp = Instant.now();
         PostSaveEventDto event = new PostSaveEventDto(789L, 101L);
-        event.setEventType(EventType.SAVE);
+        event.setEventType(EventType.CREATE);
         event.setAuthorId(1L);
         event.setAuthorUsername("testuser");
         event.setAuthorAvatar("avatar.jpg");
@@ -57,7 +57,7 @@ class PostSaveEventDtoTest {
         // Then
         assertEquals(789L, event.getSaveId());
         assertEquals(101L, event.getPostAuthorId());
-        assertEquals(EventType.SAVE, event.getEventType());
+        assertEquals(EventType.CREATE, event.getEventType());
         assertEquals(1L, event.getAuthorId());
         assertEquals("testuser", event.getAuthorUsername());
         assertEquals("avatar.jpg", event.getAuthorAvatar());
@@ -72,7 +72,7 @@ class PostSaveEventDtoTest {
     void testPostSaveEventDto_ToString() {
         // Given
         PostSaveEventDto event = new PostSaveEventDto(789L, 101L);
-        event.setEventType(EventType.SAVE);
+        event.setEventType(EventType.CREATE);
         event.setAuthorId(1L);
         event.setPostId(123L);
 

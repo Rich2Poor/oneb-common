@@ -14,7 +14,7 @@ class CommentReactionEventDtoTest {
     void testCommentReactionEventDto_Creation() {
         // Given
         CommentReactionEventDto event = new CommentReactionEventDto();
-        event.setEventType(EventType.REACTION);
+        event.setEventType(EventType.CREATE);
         event.setAuthorId(1L);
         event.setAuthorUsername("testuser");
         event.setAuthorAvatar("avatar.jpg");
@@ -29,7 +29,7 @@ class CommentReactionEventDtoTest {
         event.setCommentAuthorId(202L);
 
         // Then
-        assertEquals(EventType.REACTION, event.getEventType());
+        assertEquals(EventType.CREATE, event.getEventType());
         assertEquals(1L, event.getAuthorId());
         assertEquals("testuser", event.getAuthorUsername());
         assertEquals("avatar.jpg", event.getAuthorAvatar());
@@ -49,7 +49,7 @@ class CommentReactionEventDtoTest {
         // Given
         Instant timestamp = Instant.now();
         CommentReactionEventDto event = new CommentReactionEventDto(789L, ReactionType.DISLIKE, 101L, 202L);
-        event.setEventType(EventType.REACTION);
+        event.setEventType(EventType.CREATE);
         event.setAuthorId(1L);
         event.setAuthorUsername("testuser");
         event.setAuthorAvatar("avatar.jpg");
@@ -64,7 +64,7 @@ class CommentReactionEventDtoTest {
         assertEquals(ReactionType.DISLIKE, event.getReactionType());
         assertEquals(101L, event.getCommentId());
         assertEquals(202L, event.getCommentAuthorId());
-        assertEquals(EventType.REACTION, event.getEventType());
+        assertEquals(EventType.CREATE, event.getEventType());
         assertEquals(1L, event.getAuthorId());
         assertEquals("testuser", event.getAuthorUsername());
         assertEquals("avatar.jpg", event.getAuthorAvatar());
@@ -79,7 +79,7 @@ class CommentReactionEventDtoTest {
     void testCommentReactionEventDto_ToString() {
         // Given
         CommentReactionEventDto event = new CommentReactionEventDto(789L, ReactionType.LIKE, 101L, 202L);
-        event.setEventType(EventType.REACTION);
+        event.setEventType(EventType.CREATE);
         event.setAuthorId(1L);
         event.setPostId(123L);
 
