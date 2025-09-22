@@ -2,6 +2,7 @@ package com.oneb.common.util;
 
 import com.github.slugify.Slugify;
 
+import java.text.Normalizer;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
@@ -34,11 +35,20 @@ public final class StringUtils {
     }
 
     public static String normalizeToUsername(String input) {
-        String normalized = slugify(input);
+        String normalized = normalize(input);
         if (normalized == null) {
             return null;
         }
         return normalized.replaceAll("[^a-z0-9._-]", "");
+    }
+
+    public static String normalize(String input) {
+        input = input.replace("đ", "d")
+                .replace("Đ", "d")
+                .replace("ð", "d") // Alternative đ encoding
+                .replace("Ø", "o")
+                .replace("ø", "o");
+        return Normalizer.normalize(input, Normalizer.Form.NFKD);
     }
 
     public static String slugify(String input) {
