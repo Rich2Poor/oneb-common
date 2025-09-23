@@ -39,7 +39,7 @@ public final class StringUtils {
         if (normalized == null) {
             return null;
         }
-        return normalized.replaceAll("[^a-z0-9._-]", "");
+        return normalized.replaceAll("[^A-Za-z0-9._-]", "");
     }
 
     public static String normalize(String input) {
