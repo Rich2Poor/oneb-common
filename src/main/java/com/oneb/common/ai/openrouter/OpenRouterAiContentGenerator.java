@@ -10,6 +10,7 @@ import com.oneb.common.exception.AiContentGenerationException;
 import com.oneb.common.exception.AiRateLimitException;
 import com.oneb.common.exception.AiServiceUnavailableException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -30,7 +31,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-@ConditionalOnProperty(name = "app.common.ai.openrouter.enabled", havingValue = "true")
+@ConditionalOnBean(OpenRouterProperties.class)
 public class OpenRouterAiContentGenerator implements AiContentGenerator {
 
     private final WebClient webClient;

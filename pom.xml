@@ -43,6 +43,7 @@
         <jackson.version>2.15.2</jackson.version>
         <lombok.version>1.18.30</lombok.version>
         <junit.version>5.10.0</junit.version>
+        <commons-pool2.version>2.12.1</commons-pool2.version>
     </properties>
 
     <dependencies>
@@ -242,6 +243,42 @@
             <groupId>com.github.slugify</groupId>
             <artifactId>slugify</artifactId>
             <version>3.0.7</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Redis Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${spring.boot.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>${commons-pool2.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- JWT Dependencies -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.12.3</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.12.3</version>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.12.3</version>
+            <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
 
