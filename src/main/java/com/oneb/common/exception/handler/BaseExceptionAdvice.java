@@ -4,6 +4,7 @@ import com.oneb.common.exception.response.ErrorResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@ConditionalOnProperty(name = "app.common.exception.advice.type", havingValue = "base")
 public class BaseExceptionAdvice extends ExceptionAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
