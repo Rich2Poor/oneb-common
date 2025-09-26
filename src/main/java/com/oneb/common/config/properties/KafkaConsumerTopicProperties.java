@@ -1,13 +1,19 @@
 package com.oneb.common.config.properties;
 
 import lombok.Data;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Configuration properties for Kafka consumer topics.
+ * Only loaded when Kafka integration is enabled.
+ */
 @Data
 @Component
+@ConditionalOnProperty(name = "app.common.kafka.enabled", havingValue = "true")
 @ConfigurationProperties(value = "app.common.kafka.consumer.topics")
 public class KafkaConsumerTopicProperties {
     private List<String> userCreated;

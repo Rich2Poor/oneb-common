@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
-@ConditionalOnProperty(name = "app.common.header-info.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "app.common.header-info.enabled", havingValue = "true", matchIfMissing = false)
 @Configuration
 @RequiredArgsConstructor
 public class HeaderInfoResolverConfig implements WebMvcConfigurer {

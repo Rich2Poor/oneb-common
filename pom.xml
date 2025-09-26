@@ -5,11 +5,11 @@
 
     <groupId>com.oneb</groupId>
     <artifactId>oneb-common</artifactId>
-    <version>1.0.11-SNAPSHOT</version>
+    <version>1.0.12-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>OneB Common Library</name>
-    <description>Common utilities and components for OneB projects</description>
+    <description>Common utilities and components for OneB projects. Supports minimal exception-only mode for lightweight usage.</description>
     <url>https://github.com/Rich2Poor/oneb-common</url>
 
     <licenses>
@@ -39,23 +39,21 @@
         <spring.version>6.1.0</spring.version>
         <spring.boot.version>3.3.2</spring.boot.version>
         <spring.kafka.version>3.3.1</spring.kafka.version>
+        <spring.data.version>3.3.1</spring.data.version>
         <jackson.version>2.15.2</jackson.version>
         <lombok.version>1.18.30</lombok.version>
         <junit.version>5.10.0</junit.version>
     </properties>
 
     <dependencies>
-        <!-- Spring Framework Core (không phải Spring Boot) -->
+        <!-- ========================================= -->
+        <!-- CORE DEPENDENCIES (Required for exception-only mode) -->
+        <!-- ========================================= -->
+
+        <!-- Spring Framework Core (for @ConditionalOnProperty) -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>
             <optional>true</optional>
         </dependency>
@@ -68,19 +66,31 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Lombok -->
+        <!-- SLF4J API (Required for BaseExceptionAdvice logging) -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+
+        <!-- ========================================= -->
+        <!-- OPTIONAL DEPENDENCIES (Only loaded when features are enabled) -->
+        <!-- ========================================= -->
+
+        <!-- Spring Transaction (for TransactionHelper) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Lombok (for reduced boilerplate) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <optional>true</optional>
-        </dependency>
-
-        <!-- SLF4J API -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.9</version>
         </dependency>
 
         <!-- Spring Kafka -->
@@ -131,7 +141,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Jakarta Validation API -->
+        <!-- Jakarta Validation API (Required for BaseExceptionAdvice) -->
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
@@ -151,11 +161,11 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>${spring.kafka.version}</version>
+            <version>${spring.data.version}</version>
             <optional>true</optional>
         </dependency>
 
-        <!-- Spring Web (for HandlerMethodArgumentResolver and web annotations) -->
+        <!-- Spring Web (for BaseExceptionAdvice and HandlerMethodArgumentResolver) -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -163,7 +173,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Spring WebMVC (for @ResponseStatus) -->
+        <!-- Spring WebMVC (for BaseExceptionAdvice @ResponseStatus) -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
