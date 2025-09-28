@@ -11,6 +11,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@Component
 @ConditionalOnProperty(name = "app.common.exception.advice.type", havingValue = "base")
 public class BaseExceptionAdvice extends ExceptionAdvice {
 

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @ConditionalOnProperty("app.online-users.online-users-key")
 public class OnlineUserService {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    protected final RedisTemplate<String, Object> redisTemplate;
 
     @Value("${app.online-users.online-users-key}")
     private String onlineUserKey;
