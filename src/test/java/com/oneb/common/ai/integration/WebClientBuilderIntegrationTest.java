@@ -1,7 +1,7 @@
 package com.oneb.common.ai.integration;
 
 import com.oneb.common.ai.AiContentGenerator;
-import com.oneb.common.config.ClientConfig;
+import com.oneb.common.config.CommonClientConfig;
 import com.oneb.common.config.properties.ClientProperties;
 import com.oneb.common.config.properties.OpenRouterProperties;
 import com.oneb.common.ai.openrouter.OpenRouterAiContentGenerator;
@@ -56,7 +56,7 @@ class WebClientBuilderIntegrationTest {
 
     @Configuration
     @EnableConfigurationProperties({ClientProperties.class, OpenRouterProperties.class})
-    @Import({ClientConfig.class})
+    @Import({CommonClientConfig.class})
     static class TestConfig {
 
         // Manually create the OpenRouterAiContentGenerator bean since @Component scanning is not enabled

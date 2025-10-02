@@ -8,7 +8,6 @@ import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "app.common.client.enabled", havingValue = "true")
-public class ClientConfig {
+public class CommonClientConfig {
 
     private final ClientProperties clientProperties;
 
