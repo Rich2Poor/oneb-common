@@ -12,6 +12,7 @@ A comprehensive Java library containing common utilities and components for OneB
 - **Spring Integration**: Optional Spring components for transaction and async execution
 - **AI Integration**: OpenRouter.ai integration for content generation (optional)
 - **Kafka Integration**: Producer and consumer utilities (optional)
+- **Redis Pub/Sub**: Auto-configured Redis Pub/Sub listeners (optional)
 - **HTTP Client**: Reactive WebClient configuration (optional)
 
 ## Usage Modes
@@ -49,6 +50,9 @@ app:
         enabled: true      # AI integration
     kafka:
       enabled: true        # Kafka integration
+    redis:
+      pubsub:
+        enabled: true      # Redis Pub/Sub integration
 ```
 
 ### 3. Full Library Mode
@@ -324,6 +328,12 @@ app:
         default-model: openai/gpt-4
     kafka:
       enabled: true
+    redis:
+      pubsub:
+        enabled: true
+        channels:
+          user-events:
+            - com.example.listener.UserEventListener
 ```
 
 ## Dependencies
@@ -367,6 +377,13 @@ mvn clean deploy
 4. Add tests for new functionality
 5. Run tests to ensure everything passes
 6. Submit a pull request
+
+## Additional Documentation
+
+- [AI Content Generation](AI_CONTENT_GENERATION.md) - OpenRouter.ai integration guide
+- [Redis Pub/Sub](REDIS_PUBSUB.md) - Redis Pub/Sub listener configuration guide
+- [Community Domain](COMMUNITY_DOMAIN_CHANGELOG.md) - Community domain changelog
+- [Migration Guide](MIGRATION_TO_ONEB_COMMON.md) - Migration guide to oneb-common
 
 ## License
 
