@@ -20,7 +20,6 @@ public class IncomingMessageDto {
     private ConversationType conversationType;
     private String conversationName;
     private List<Long> participantIds;
-    private Long senderId;
     private String content;
     private LocalDateTime createdAt;
 }
