@@ -259,6 +259,12 @@
             <version>${commons-pool2.version}</version>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.github.yitter</groupId>
+            <artifactId>yitter-idgenerator</artifactId>
+            <version>1.0.6</version>
+            <optional>true</optional>
+        </dependency>
 
         <!-- JWT Dependencies -->
         <dependency>
