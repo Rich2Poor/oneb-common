@@ -9,27 +9,29 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
 @MappedSuperclass
-public class BaseUser extends DateAudit {
+public class BaseUser {
 
     protected String username;
     protected String fullName;
     protected String avatar;
-    protected String avatarLargeUrl;
+    protected String tenant;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", length = 20)
     protected UserStatus status = UserStatus.ACTIVE;
 
-    @Column(name = "default_language")
-    protected String defaultLanguage = "en";
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    @Column(name = "tenant", length = 20)
-    protected String tenant;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public boolean isBlocked() {
         return status == UserStatus.BLOCKED;
