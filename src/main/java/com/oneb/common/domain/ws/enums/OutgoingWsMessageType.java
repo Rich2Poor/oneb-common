@@ -10,11 +10,13 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum OutgoingWsMessageType {
-    NOTIFICATION,
-    RECEIVED_MESSAGE,
-    SENT_MESSAGE,
-    SENT_MESSAGE_ERROR,
-    TYPING_INDICATOR,
-    READ_MESSAGE
+    NOTIFICATION(false),
+    RECEIVED_MESSAGE(false),
+    SENT_MESSAGE(false),
+    SENT_MESSAGE_ERROR(false),
+    MESSAGE_ACTION(true),
+    VIDEO_ROOM_UPDATE(true);
+
+    private final boolean needSubscribe;
 }
 

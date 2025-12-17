@@ -35,5 +35,11 @@ public class WsMessageService {
 
         redisTemplate.convertAndSend(wsMessagesChannel, outgoingWsMessageWrapper);
     }
+
+    public <T> void sendBroadcast(OutgoingWsMessageType type, T data) {
+        OutgoingWsMessageWrapper<T> outgoingWsMessageWrapper = OutgoingWsMessageWrapper.of(type, data);
+
+        redisTemplate.convertAndSend(wsMessagesChannel, outgoingWsMessageWrapper);
+    }
 }
 

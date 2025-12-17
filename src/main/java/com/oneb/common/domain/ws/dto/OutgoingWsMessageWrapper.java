@@ -20,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OutgoingWsMessageWrapper<T> {
     private List<Long> recipients;
+    private boolean isBroadcast = false;
     private OutgoingWsMessage<T> message;
 
     public static <T> OutgoingWsMessageWrapper<T> of(List<Long> recipients, OutgoingWsMessage<T> message) {
@@ -39,6 +40,13 @@ public class OutgoingWsMessageWrapper<T> {
 
     public static <T> OutgoingWsMessageWrapper<T> of(Long recipient, OutgoingWsMessageType type, T data) {
         return of(List.of(recipient), type, data);
+    }
+
+    public static <T> OutgoingWsMessageWrapper<T> of(OutgoingWsMessageType type, T data) {
+        return OutgoingWsMessageWrapper.<T>builder()
+                .isBroadcast(true)
+                .message(OutgoingWsMessage.of(type, data))
+                .build();
     }
 }
 
