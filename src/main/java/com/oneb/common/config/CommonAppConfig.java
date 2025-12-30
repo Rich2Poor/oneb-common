@@ -11,6 +11,13 @@ import org.springframework.context.annotation.Primary;
 
 import java.text.SimpleDateFormat;
 
+/**
+ * Common application configuration providing shared beans.
+ * <p>
+ * <b>Note:</b> This class uses Jackson 2 APIs (com.fasterxml.jackson).
+ * Spring Boot 4.0 uses Jackson 3 by default. Projects using this library
+ * should include spring-boot-jackson2 dependency if needed.
+ */
 @ConditionalOnProperty(name = "app.common.app-config.enabled", havingValue = "true", matchIfMissing = true)
 @Configuration
 public class CommonAppConfig {

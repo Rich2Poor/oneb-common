@@ -4,6 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.json.JsonSanitizer;
 
+/**
+ * Utility class for JSON operations.
+ * <p>
+ * <b>Note:</b> This class uses Jackson 2 APIs (com.fasterxml.jackson).
+ * Spring Boot 4.0 uses Jackson 3 by default. Projects using this library
+ * should include spring-boot-jackson2 dependency if needed.
+ */
 public class JsonUtil {
 
     public static String toString(Object payload, ObjectMapper objectMapper) {

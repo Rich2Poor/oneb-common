@@ -19,6 +19,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * - Leverages auto-configuration as much as possible
  * - Only customizes RedisTemplate for JSON serialization needs
  * - Uses @ConditionalOnMissingBean to avoid conflicts
+ * <p>
+ * <b>Note:</b> This class uses Jackson 2 APIs (com.fasterxml.jackson).
+ * Spring Boot 4.0 uses Jackson 3 by default. Projects using this library
+ * should include spring-boot-jackson2 dependency if needed.
  */
 @Slf4j
 @Configuration

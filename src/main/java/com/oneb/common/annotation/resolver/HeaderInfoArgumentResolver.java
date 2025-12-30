@@ -63,7 +63,16 @@ public class HeaderInfoArgumentResolver implements HandlerMethodArgumentResolver
     private List<Role> getRoles(HttpServletRequest request) {
         String roles = getHeader(request, HeaderKey.X_USER_ROLES);
         return Stream.of(roles.split(","))
-                .map(Role::valueOf)
+                .map(String::trim)
+                .filter(role -> !role.isEmpty())
+                .map(role -> {
+                    try {
+                        return Role.valueOf(role);
+                    } catch (IllegalArgumentException e) {
+                        log.warn("Unknown role in header: {}", role);
+                        throw new BadRequestException("Invalid role: " + role);
+                    }
+                })
                 .toList();
     }
 
@@ -79,7 +88,11 @@ public class HeaderInfoArgumentResolver implements HandlerMethodArgumentResolver
 
     private Long getUserId(HttpServletRequest request) {
         String userIdHeader = getHeader(request, HeaderKey.X_USER_ID);
-        return Long.parseLong(userIdHeader);
+        try {
+            return Long.parseLong(userIdHeader);
+        } catch (NumberFormatException e) {
+            throw new BadRequestException("Invalid user ID format: " + userIdHeader);
+        }
     }
 
     private String getHeader(HttpServletRequest request, HeaderKey headerKey) {

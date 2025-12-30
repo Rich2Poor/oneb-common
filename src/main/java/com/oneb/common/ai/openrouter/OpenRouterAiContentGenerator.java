@@ -130,12 +130,21 @@ public class OpenRouterAiContentGenerator implements AiContentGenerator {
             long retryAfter = response.headers().header("Retry-After")
                     .stream()
                     .findFirst()
-                    .map(Long::parseLong)
+                    .map(this::parseRetryAfter)
                     .orElse(60L);
             return Mono.error(new AiRateLimitException("Rate limit exceeded", retryAfter));
         }
         return response.bodyToMono(String.class)
                 .map(body -> new AiContentGenerationException("Client error: " + response.statusCode() + " - " + body));
+    }
+
+    private long parseRetryAfter(String value) {
+        try {
+            return Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            log.warn("Unable to parse Retry-After header value: {}, using default 60 seconds", value);
+            return 60L;
+        }
     }
 
     private Mono<? extends Throwable> handleServerError(ClientResponse response) {

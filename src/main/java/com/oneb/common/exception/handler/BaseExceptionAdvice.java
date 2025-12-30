@@ -90,8 +90,9 @@ public class BaseExceptionAdvice extends ExceptionAdvice {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponse> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         log.warn("Type mismatch: {}", ex.getMessage(), ex);
+        String expectedType = ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "unknown";
         String message = String.format("Invalid value '%s' for parameter '%s'. Expected type: %s",
-                ex.getValue(), ex.getName(), ex.getRequiredType().getSimpleName());
+                ex.getValue(), ex.getName(), expectedType);
         ErrorResponse errorResponse = new ErrorResponse("TYPE_MISMATCH", message);
         return ResponseEntity.badRequest().body(errorResponse);
     }

@@ -106,10 +106,36 @@ public class JwtService {
         SecretKey key = isRefreshToken ? getRefreshSigningKey() : getSigningKey();
         Claims claims = extractAllClaims(token, key);
         String sub = claims.get("sub", String.class);
+        if (sub == null || sub.isBlank()) {
+            throw new IllegalArgumentException("JWT token missing required 'sub' claim");
+        }
+
+        Long userId;
+        try {
+            userId = Long.parseLong(sub);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("JWT token 'sub' claim is not a valid user ID: " + sub, e);
+        }
+
         List<String> roles = claims.get("roles", List.class);
+        List<Role> roleList = (roles == null || roles.isEmpty())
+                ? List.of()
+                : roles.stream()
+                        .filter(role -> role != null && !role.isBlank())
+                        .map(role -> {
+                            try {
+                                return Role.valueOf(role);
+                            } catch (IllegalArgumentException e) {
+                                log.warn("Unknown role in JWT token: {}", role);
+                                return null;
+                            }
+                        })
+                        .filter(role -> role != null)
+                        .toList();
+
         return UserInfo.builder()
-                .id(Long.parseLong(sub))
-                .roles(roles.stream().map(Role::valueOf).toList())
+                .id(userId)
+                .roles(roleList)
                 .tenant(claims.get("tenant", String.class))
                 .build();
     }

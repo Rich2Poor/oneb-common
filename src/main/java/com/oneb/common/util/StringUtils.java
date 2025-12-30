@@ -43,6 +43,9 @@ public final class StringUtils {
     }
 
     public static String normalize(String input) {
+        if (input == null) {
+            return null;
+        }
         input = input.replace("đ", "d")
                 .replace("Đ", "d")
                 .replace("ð", "d") // Alternative đ encoding

@@ -5,7 +5,7 @@
 
     <groupId>com.oneb</groupId>
     <artifactId>oneb-common</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>OneB Common Library</name>
@@ -56,7 +56,11 @@
         <jakarta.servlet.version>6.1.0</jakarta.servlet.version>
         <slf4j.version>2.0.16</slf4j.version>
         <reactor.version>2024.0.2</reactor.version>
-        <netty.version>4.1.116.Final</netty.version>
+        <!--
+            Netty 4.2.x required for Spring Framework 7.0 compatibility.
+            See: https://github.com/spring-projects/spring-framework/issues/34996
+        -->
+        <netty.version>4.2.0.Final</netty.version>
     </properties>
 
     <dependencies>
