@@ -20,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OutgoingWsMessageWrapper<T> {
     private List<Long> recipients;
+    @Builder.Default
     private boolean isBroadcast = false;
     private OutgoingWsMessage<T> message;
 

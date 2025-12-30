@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
@@ -40,9 +40,9 @@ public class CommonRedisConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
 
-        // JSON serializer for values
-        Jackson2JsonRedisSerializer<Object> jsonSerializer =
-                new Jackson2JsonRedisSerializer<>(objectMapper, Object.class);
+        // JSON serializer for values (using GenericJackson2JsonRedisSerializer as Jackson2JsonRedisSerializer is deprecated)
+        GenericJackson2JsonRedisSerializer jsonSerializer =
+                new GenericJackson2JsonRedisSerializer(objectMapper);
 
         // String serializer for keys (more efficient and readable)
         StringRedisSerializer stringSerializer = new StringRedisSerializer();

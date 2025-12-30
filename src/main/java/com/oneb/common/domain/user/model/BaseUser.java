@@ -1,12 +1,9 @@
 package com.oneb.common.domain.user.model;
 
-import com.oneb.common.domain.common.model.DateAudit;
 import com.oneb.common.domain.user.enums.UserStatus;
-import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
