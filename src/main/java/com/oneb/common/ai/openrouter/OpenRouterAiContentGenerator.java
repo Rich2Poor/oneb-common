@@ -163,6 +163,6 @@ public class OpenRouterAiContentGenerator implements AiContentGenerator {
             return throwable;
         }
         log.error("Unexpected error during content generation", throwable);
-        return new AiContentGenerationException("Unexpected error during content generation", throwable);
+        return new AiContentGenerationException("Unexpected error during content generation: " + throwable.getMessage());
     }
 }
