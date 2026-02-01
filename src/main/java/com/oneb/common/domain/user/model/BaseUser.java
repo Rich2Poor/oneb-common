@@ -24,6 +24,8 @@ public class BaseUser {
     @Enumerated(EnumType.STRING)
     protected UserStatus status = UserStatus.ACTIVE;
 
+    protected LocalDateTime deletedAt;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -36,5 +38,9 @@ public class BaseUser {
 
     public boolean isActive() {
         return status == UserStatus.ACTIVE;
+    }
+
+    public boolean isDeleted() {
+        return status == UserStatus.DELETED;
     }
 }
