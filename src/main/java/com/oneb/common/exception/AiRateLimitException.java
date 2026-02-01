@@ -1,23 +1,19 @@
 package com.oneb.common.exception;
 
+import lombok.Getter;
+
 /**
  * Exception thrown when AI service rate limits are exceeded.
  */
-public class AiRateLimitException extends AiContentGenerationException {
+@Getter
+public class AiRateLimitException extends BaseException {
+
+    private static final String ERROR_CODE = "AI_RATE_LIMIT_ERROR";
 
     private final long retryAfterSeconds;
 
     public AiRateLimitException(String message, long retryAfterSeconds) {
-        super(message);
+        super(ERROR_CODE, message);
         this.retryAfterSeconds = retryAfterSeconds;
-    }
-
-    public AiRateLimitException(String message, Throwable cause, long retryAfterSeconds) {
-        super(message, cause);
-        this.retryAfterSeconds = retryAfterSeconds;
-    }
-
-    public long getRetryAfterSeconds() {
-        return retryAfterSeconds;
     }
 }

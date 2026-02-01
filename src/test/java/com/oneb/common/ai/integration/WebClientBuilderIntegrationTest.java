@@ -1,12 +1,13 @@
 package com.oneb.common.ai.integration;
 
 import com.oneb.common.ai.AiContentGenerator;
-import com.oneb.common.config.ClientConfig;
+import com.oneb.common.config.CommonClientConfig;
 import com.oneb.common.config.properties.ClientProperties;
 import com.oneb.common.config.properties.OpenRouterProperties;
 import com.oneb.common.ai.openrouter.OpenRouterAiContentGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,8 +55,16 @@ class WebClientBuilderIntegrationTest {
     }
 
     @Configuration
-    @Import({ClientConfig.class, ClientProperties.class, OpenRouterProperties.class, OpenRouterAiContentGenerator.class})
+    @EnableConfigurationProperties({ClientProperties.class, OpenRouterProperties.class})
+    @Import({CommonClientConfig.class})
     static class TestConfig {
-        // Test configuration that imports the necessary beans
+
+        // Manually create the OpenRouterAiContentGenerator bean since @Component scanning is not enabled
+        @Bean
+        public OpenRouterAiContentGenerator openRouterAiContentGenerator(
+                WebClient.Builder webClientBuilder,
+                OpenRouterProperties openRouterProperties) {
+            return new OpenRouterAiContentGenerator(webClientBuilder, openRouterProperties);
+        }
     }
 }

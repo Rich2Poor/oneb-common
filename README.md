@@ -10,6 +10,53 @@ A comprehensive Java library containing common utilities and components for OneB
 - **JSON Utilities**: Flexible JSON processing interface (bring your own implementation)
 - **Exception Handling**: Structured exception hierarchy for better error handling
 - **Spring Integration**: Optional Spring components for transaction and async execution
+- **AI Integration**: OpenRouter.ai integration for content generation (optional)
+- **Kafka Integration**: Producer and consumer utilities (optional)
+- **Redis Pub/Sub**: Auto-configured Redis Pub/Sub listeners (optional)
+- **HTTP Client**: Reactive WebClient configuration (optional)
+
+## Usage Modes
+
+This library supports different usage modes to minimize impact on your application:
+
+### 1. Exception-Only Mode (Minimal Impact)
+For services that only need `BaseExceptionAdvice`:
+
+```yaml
+app:
+  common:
+    exception-only:
+      enabled: true
+```
+
+This loads only exception handling components (~1MB memory footprint).
+
+### 2. Selective Components Mode
+Enable only the components you need:
+
+```yaml
+app:
+  common:
+    app-config:
+      enabled: true        # Custom ObjectMapper
+    header-info:
+      enabled: true        # Header argument resolver
+    async:
+      enabled: true        # AsyncExecutor
+    client:
+      enabled: true        # WebClient configuration
+    ai:
+      openrouter:
+        enabled: true      # AI integration
+    kafka:
+      enabled: true        # Kafka integration
+    redis:
+      pubsub:
+        enabled: true      # Redis Pub/Sub integration
+```
+
+### 3. Full Library Mode
+All components enabled (default behavior in previous versions).
 
 ## Installation
 
@@ -223,15 +270,83 @@ public class MyService {
 }
 ```
 
+## Configuration Examples
+
+### Exception-Only Configuration
+Create `application-exception-only.yml`:
+
+```yaml
+app:
+  common:
+    exception-only:
+      enabled: true
+    # All other components disabled by default
+```
+
+### Minimal Configuration
+For services needing basic utilities:
+
+```yaml
+app:
+  common:
+    app-config:
+      enabled: false      # Disable custom ObjectMapper
+    header-info:
+      enabled: false      # Disable header resolver
+    async:
+      enabled: false      # Disable AsyncExecutor
+    client:
+      enabled: false      # Disable WebClient
+    ai:
+      openrouter:
+        enabled: false    # Disable AI
+    kafka:
+      enabled: false      # Disable Kafka
+```
+
+### Full Configuration
+For services using all features:
+
+```yaml
+app:
+  common:
+    app-config:
+      enabled: true
+    header-info:
+      enabled: true
+    async:
+      enabled: true
+    client:
+      enabled: true
+      timeout: 60000
+      read-timeout: 60000
+      write-timeout: 60000
+    ai:
+      openrouter:
+        enabled: true
+        api-key: ${OPENROUTER_API_KEY}
+        default-model: openai/gpt-4
+    kafka:
+      enabled: true
+    redis:
+      pubsub:
+        enabled: true
+        channels:
+          user-events:
+            - com.example.listener.UserEventListener
+```
+
 ## Dependencies
 
 ### Required
 - Java 21+
 - SLF4J API
 
-### Optional
+### Optional (loaded only when enabled)
 - Spring Context (for Spring components)
 - Spring Transaction (for TransactionHelper)
+- Spring WebFlux (for WebClient)
+- Spring Kafka (for Kafka integration)
 - Lombok (for reduced boilerplate)
 
 ## Building
@@ -262,6 +377,13 @@ mvn clean deploy
 4. Add tests for new functionality
 5. Run tests to ensure everything passes
 6. Submit a pull request
+
+## Additional Documentation
+
+- [AI Content Generation](AI_CONTENT_GENERATION.md) - OpenRouter.ai integration guide
+- [Redis Pub/Sub](REDIS_PUBSUB.md) - Redis Pub/Sub listener configuration guide
+- [Community Domain](COMMUNITY_DOMAIN_CHANGELOG.md) - Community domain changelog
+- [Migration Guide](MIGRATION_TO_ONEB_COMMON.md) - Migration guide to oneb-common
 
 ## License
 

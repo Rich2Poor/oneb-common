@@ -4,6 +4,7 @@ import com.oneb.common.exception.response.ErrorResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -16,6 +17,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -25,6 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@RestControllerAdvice
+@ConditionalOnProperty(name = "app.common.exception.advice.type", havingValue = "base")
 public class BaseExceptionAdvice extends ExceptionAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -86,8 +90,9 @@ public class BaseExceptionAdvice extends ExceptionAdvice {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponse> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         log.warn("Type mismatch: {}", ex.getMessage(), ex);
+        String expectedType = ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "unknown";
         String message = String.format("Invalid value '%s' for parameter '%s'. Expected type: %s",
-                ex.getValue(), ex.getName(), ex.getRequiredType().getSimpleName());
+                ex.getValue(), ex.getName(), expectedType);
         ErrorResponse errorResponse = new ErrorResponse("TYPE_MISMATCH", message);
         return ResponseEntity.badRequest().body(errorResponse);
     }

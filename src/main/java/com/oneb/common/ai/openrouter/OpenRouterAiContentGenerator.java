@@ -10,6 +10,7 @@ import com.oneb.common.exception.AiContentGenerationException;
 import com.oneb.common.exception.AiRateLimitException;
 import com.oneb.common.exception.AiServiceUnavailableException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -30,7 +31,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-@ConditionalOnProperty(name = "app.common.ai.openrouter.enabled", havingValue = "true")
+@ConditionalOnBean(OpenRouterProperties.class)
 public class OpenRouterAiContentGenerator implements AiContentGenerator {
 
     private final WebClient webClient;
@@ -129,12 +130,21 @@ public class OpenRouterAiContentGenerator implements AiContentGenerator {
             long retryAfter = response.headers().header("Retry-After")
                     .stream()
                     .findFirst()
-                    .map(Long::parseLong)
+                    .map(this::parseRetryAfter)
                     .orElse(60L);
             return Mono.error(new AiRateLimitException("Rate limit exceeded", retryAfter));
         }
         return response.bodyToMono(String.class)
                 .map(body -> new AiContentGenerationException("Client error: " + response.statusCode() + " - " + body));
+    }
+
+    private long parseRetryAfter(String value) {
+        try {
+            return Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            log.warn("Unable to parse Retry-After header value: {}, using default 60 seconds", value);
+            return 60L;
+        }
     }
 
     private Mono<? extends Throwable> handleServerError(ClientResponse response) {
@@ -153,6 +163,6 @@ public class OpenRouterAiContentGenerator implements AiContentGenerator {
             return throwable;
         }
         log.error("Unexpected error during content generation", throwable);
-        return new AiContentGenerationException("Unexpected error during content generation", throwable);
+        return new AiContentGenerationException("Unexpected error during content generation: " + throwable.getMessage());
     }
 }

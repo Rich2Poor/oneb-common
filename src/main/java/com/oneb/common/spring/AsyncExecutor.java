@@ -1,6 +1,7 @@
 package com.oneb.common.spring;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PreDestroy;
@@ -9,11 +10,13 @@ import java.util.function.Supplier;
 
 /**
  * Async executor for background tasks.
- * 
+ * Only loaded when async execution is enabled.
+ *
  * @author Tuyen
  * @version 1.0.0
  */
 @Component
+@ConditionalOnProperty(name = "app.common.async.enabled", havingValue = "true")
 @Slf4j
 public class AsyncExecutor {
     

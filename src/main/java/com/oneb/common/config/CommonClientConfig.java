@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "app.common.client.enabled", havingValue = "true")
-public class ClientConfig {
+public class CommonClientConfig {
 
     private final ClientProperties clientProperties;
 

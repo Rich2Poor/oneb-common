@@ -1,6 +1,7 @@
 package com.oneb.common.config.properties;
 
 import lombok.Data;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -8,9 +9,11 @@ import java.time.Duration;
 
 /**
  * Configuration properties for OpenRouter.ai integration.
+ * Only loaded when AI integration is enabled.
  */
 @Data
 @Component
+@ConditionalOnProperty(name = "app.common.ai.openrouter.enabled", havingValue = "true")
 @ConfigurationProperties(prefix = "app.common.ai.openrouter")
 public class OpenRouterProperties {
 

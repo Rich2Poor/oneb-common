@@ -1,43 +1,36 @@
 package com.oneb.common.domain.user.model;
 
-import com.oneb.common.domain.common.model.DateAudit;
-import com.oneb.common.domain.user.enums.AuthProvider;
 import com.oneb.common.domain.user.enums.UserStatus;
-import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
 @MappedSuperclass
-public class BaseUser extends DateAudit {
+public class BaseUser {
 
     protected String username;
-    protected String firstName;
-    protected String lastName;
+    protected String fullName;
     protected String avatar;
-    protected String avatarLargeUrl;
+    protected String tenant;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", length = 20)
     protected UserStatus status = UserStatus.ACTIVE;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    protected AuthProvider provider;
+    protected LocalDateTime deletedAt;
 
-    protected String providerId;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    @Column(name = "default_language")
-    protected String defaultLanguage = "EN";
-
-    @Column(name = "tenant", length = 20)
-    protected String tenant;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public boolean isBlocked() {
         return status == UserStatus.BLOCKED;
@@ -45,5 +38,9 @@ public class BaseUser extends DateAudit {
 
     public boolean isActive() {
         return status == UserStatus.ACTIVE;
+    }
+
+    public boolean isDeleted() {
+        return status == UserStatus.DELETED;
     }
 }

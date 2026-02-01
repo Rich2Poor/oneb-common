@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Configuration properties for Kafka consumer topics.
+ * Only loaded when Kafka integration is enabled.
+ */
 @Data
 @Component
 @ConfigurationProperties(value = "app.common.kafka.consumer.topics")
@@ -13,4 +17,10 @@ public class KafkaConsumerTopicProperties {
     private List<String> userCreated;
     private List<String> userUpdated;
     private List<String> postEvents;
+    private List<String> communityEvents;
+    private List<String> commentEvents;
+    private List<String> postSaveEvents;
+    private List<String> commentReactionEvents;
+    private List<String> postReactionEvents;
+    private List<String> followEvents;
 }

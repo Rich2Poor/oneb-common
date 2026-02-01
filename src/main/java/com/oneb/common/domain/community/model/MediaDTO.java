@@ -23,6 +23,6 @@ public class MediaDTO {
     private Double duration;
     private Long thumbnailId;
     private String thumbnailUrl;
-    private Long thumbnailWidth;
-    private Long thumbnailHeight;
+    private Integer thumbnailWidth;
+    private Integer thumbnailHeight;
 }
